@@ -1,6 +1,6 @@
 # Bitget Trading Bot
 
-An automated cryptocurrency trading bot for Bitget exchange that implements custom trading strategies using TradingView technical analysis and real-time websocket data.
+An automated cryptocurrency trading bot for Bitget exchange that implements custom trading strategies using TradingView technical analysis, based on convenient and flexible risk management and position management, and real-time websocket data. 
 
 ## Features
 
@@ -20,13 +20,11 @@ An automated cryptocurrency trading bot for Bitget exchange that implements cust
 
 ## Installation
 
-```bash
-pip install tradingview-ta websocket-client asyncio
-```
+No need any special installation.
 
 ## Configuration
 
-Create a configuration file with your API credentials and trading parameters:
+Configure file config.py with your API credentials and trading parameters in main.py:
 
 ```python
 # General Settings
@@ -65,7 +63,7 @@ await manage_websocket_public_subscriptions(subscr_queue, pos_check_queue)
 
 ## Trading Strategy Implementation
 
-Add custom strategies in the `strategies.py` file:
+Use current startegies or add custom ones in the `strategies.py` file:
 
 ```python
 async def tradingviewTA_candleSpike(exchange, interval, product_type, granularity, limit, volume, symb_def):
@@ -84,7 +82,7 @@ The bot includes comprehensive position management:
 
 ## Usage
 
-1. Set up your configuration parameters
+1. Set up your configuration parameters in config.py
 2. Run the bot:
 
 ```bash
