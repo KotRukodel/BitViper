@@ -1,2 +1,100 @@
-# BitViper
-A Python-based cryptocurrency trading bot for Bitget Futures, featuring real-time WebSocket integration, TradingView technical analysis, and automated position management. Implements risk-managed trading strategies with configurable parameters for stop-loss, take-profit, and position sizing.
+# Bitget Trading Bot
+
+An automated cryptocurrency trading bot for Bitget exchange that implements custom trading strategies using TradingView technical analysis and real-time websocket data.
+
+## Features
+
+- Real-time market data processing via Bitget WebSocket API
+- Custom trading strategies based on TradingView Technical Analysis
+- Automated position management with stop-loss and take-profit
+- Risk management with configurable trade sizing
+- Support for both crossed and isolated margin modes
+- Flexible leverage settings
+- Position mode selection (one-way/hedge)
+
+## Prerequisites
+
+- Python 3.7+
+- Bitget API credentials
+- TradingView Technical Analysis library
+
+## Installation
+
+```bash
+pip install tradingview-ta websocket-client asyncio
+```
+
+## Configuration
+
+Create a configuration file with your API credentials and trading parameters:
+
+```python
+# General Settings
+PRODUCTTYPE = "SUSDT-FUTURES"    # Account type
+MARGINCOIN = "SUSDT"            # Margin currency
+VOLUME = 1000000                # Min trading volume threshold
+LEVERAGE = 10                   # Default leverage (10x-125x)
+
+# Risk Management
+TRADE_RISK = 0.03              # Risk per trade (3%)
+RR = 1.5                       # Risk/Reward ratio
+
+# Trading Intervals
+GRANULARITY = '5m'             # Candle interval
+LIMIT = '4'                    # Number of candles to analyze
+```
+
+## WebSocket Integration
+
+The bot uses three main WebSocket connections:
+
+1. Private data stream for account/position updates:
+```python
+await websocket_private_data(PRODUCTTYPE, private_queue, pos_check_queue)
+```
+
+2. Public market data stream:
+```python
+await websocket_public_data(PRODUCTTYPE, subscr_queue, public_queue, pos_check_queue)
+```
+
+3. Subscription management:
+```python
+await manage_websocket_public_subscriptions(subscr_queue, pos_check_queue)
+```
+
+## Trading Strategy Implementation
+
+Add custom strategies in the `strategies.py` file:
+
+```python
+async def tradingviewTA_candleSpike(exchange, interval, product_type, granularity, limit, volume, symb_def):
+    # Implement your trading logic here
+    return SYMBOL, RESULT_PREDICT
+```
+
+## Position Management
+
+The bot includes comprehensive position management:
+
+- Automatic stop-loss and take-profit calculation
+- Position sizing based on account risk parameters
+- Real-time position monitoring and updates
+- Automatic position closure based on defined criteria
+
+## Usage
+
+1. Set up your configuration parameters
+2. Run the bot:
+
+```bash
+python main.py
+```
+
+## Risk Warning
+
+This software is for educational purposes only. Cryptocurrency trading carries significant risk. Always test with small amounts first and never trade more than you can afford to lose.
+
+## License
+
+MIT
