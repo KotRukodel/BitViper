@@ -1,0 +1,5 @@
+API_KEY = 'your_api_key'
+API_SECRET = 'your_api_secret'
+PASSPHRASE = 'your_passphrase_for_api_key'
+TELEGRAM_BOT_TOKEN = 'your_telegram_bot_token'
+TELEGRAM_CHANEL = 'id_of_your_telegram_channel_to_receive_messages_from_bot'
